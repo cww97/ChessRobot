@@ -34,10 +34,6 @@ if state == dType.DobotConnect.DobotConnect_NoError:
             offset = -50
         lastIndex = dType.SetPTPCmd(api, dType.PTPMode.PTPMOVLXYZMode, 200 + offset, offset, offset, offset, isQueued=1)[0]
 
-    #  cww97
-    dType.SetEndEffectorSuctionCup(api, True, True, isQueued=1)
-    # dType.SetEndEffectorSuctionCup(api, True, False, isQueued=1)
-
     # Start to Execute Command Queued
     dType.SetQueuedCmdStartExec(api)
 
