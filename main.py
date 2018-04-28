@@ -11,10 +11,9 @@ def work():
 		state = myeye.see()
 		if state != last_state:
 			last_state = state
+			if brain.game_over(state): break
 			x, y = brain.think(state)
 			dobot.set_chess(x, y)
-			if brain.game_over():
-				break
 		time.sleep(1000)
 	pass
 

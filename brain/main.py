@@ -3,7 +3,7 @@
 # out: action
 
 
-def game_over():
+def game_over(state):
 	return False
 
 
