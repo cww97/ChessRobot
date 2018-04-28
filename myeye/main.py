@@ -3,9 +3,9 @@
 # out: matrix of a board state
 
 
-def main():
-	pass
+def see():
+	return [[], []]
 
 
 if __name__ == '__main__':
-	main()
+	see()

@@ -861,7 +861,7 @@ def GetEndEffectorLaser(api):
     output('GetEndEffectorLaser: isCtrlEnabled=%d, isOn=%4f' %(isCtrlEnabled.value,  isOn.value))
     return [isCtrlEnabled.value, isOn.value]
     
-def SetEndEffectorSuctionCup(api, enableCtrl,  on, isQueued=0):
+def SetEndEffectorSuctionCup(api: object, enableCtrl: object, on: object, isQueued: object = 0) -> object:
     queuedCmdIndex = c_uint64(0)
     while(True):
         result = api.SetEndEffectorSuctionCup(enableCtrl,  on,  isQueued,  byref(queuedCmdIndex))

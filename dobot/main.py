@@ -43,7 +43,7 @@ class Board:
 
 # need to be updated
 class ChessArea:
-    n, m, HEIGHT = 9, 9, 2
+    n, m, HEIGHT = 6, 7, 2  # n: row, m: col
     LOWER_LEFT = [318, -86, HEIGHT]
     LOWER_RIGHT = [318, 86, HEIGHT]
     UPPER_LEFT = [132, -86, HEIGHT]
@@ -53,11 +53,17 @@ class ChessArea:
     unit_wid = 1. * (LOWER_RIGHT[0] - UPPER_RIGHT[0]) / (m - 1)
     idx = 0
     
-    def __init__(self):
-        self.idx = 0
+    def location(self, x, y):
+        ans = self.LOWER_LEFT
+        ans[0] += x * self.unit_len
+        ans[1] += y * self.unit_wid
+        return ans
         
     @staticmethod
-    def get_chess():
+    def get_chess(self):
+        self.idx += 1
+        x, y = self.idx / self.m, self.idx % self.m
+        move(self.location(x, y))
         dType.SetEndEffectorSuctionCup(api, True, True, isQueued=1)
 
 

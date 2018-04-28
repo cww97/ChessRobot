@@ -3,10 +3,14 @@
 # out: action
 
 
-def main():
-	pass
+def game_over():
+	return False
+
+
+def think(state):
+	return 0, 0
 
 
 if __name__ == '__main__':
-	main()
+	pass
 
