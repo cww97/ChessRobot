@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-@author: Junxiao Song
-""" 
-
 from __future__ import print_function
 import numpy as np
-
+from dobot.dobot_control import take_move
 class Board(object):
     """
     board for the game
@@ -169,8 +164,7 @@ class Game(object):
             move = player_in_turn.get_action(self.board)
             if current_player == 2:
                 current_robot2_move = self.board.move_to_location(move)
-                print('current robot move at:')
-                print(current_robot2_move)
+                take_move(current_robot2_move)
             self.board.do_move(move)
             if is_shown:
                 self.graphic(self.board, player1.player, player2.player)
