@@ -1,5 +1,11 @@
-import DobotDllType as dType
+#import DobotDllType as dType
 
+def take_move(move):
+# input like [x,y] list
+    print('current dobot move at :')
+    print(move)
+
+'''
 CON_STR = {
     dType.DobotConnect.DobotConnect_NoError:  "DobotConnect_NoError",
     dType.DobotConnect.DobotConnect_NotFound: "DobotConnect_NotFound",
@@ -46,3 +52,4 @@ if state == dType.DobotConnect.DobotConnect_NoError:
 
 # Disconnect Dobot
 dType.DisconnectDobot(api)
+'''

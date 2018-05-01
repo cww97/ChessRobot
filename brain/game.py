@@ -1,6 +1,6 @@
 from __future__ import print_function
 import numpy as np
-from dobot.dobot_control import take_move
+from dobot.DobotControl import take_move
 class Board(object):
     """
     board for the game
@@ -179,10 +179,7 @@ class Game(object):
             
             
     def start_self_play(self, player, is_shown=0, temp=1e-3):
-        """ start a self-play game using a MCTS player, reuse the search tree
-        store the self-play data: (state, mcts_probs, z)
-        """
-        self.board.init_board()        
+        self.board.init_board()
         p1, p2 = self.board.players
         states, mcts_probs, current_players = [], [], []        
         while(1):
