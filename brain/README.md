@@ -16,3 +16,10 @@
 
 ## 运行
 跑着玩的话直接 python main_start.py就好拉。。。
+
+## 惯例吐槽
+图像处理那块感觉是要用我写的那个ImageProcess里面的垃圾了。。。
+//常元昊求求你快开始把
+
+## 附
+参考：https://github.com/junxiaosong/AlphaZero_Gomoku
