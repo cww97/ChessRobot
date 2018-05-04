@@ -63,7 +63,7 @@ def run():
         except:
             policy_param = pickle.load(open(model_file, 'rb'), encoding = 'bytes')  # To support python3
         best_policy = PolicyValueNet(width, height, policy_param)
-        mcts_player = MCTSPlayer(best_policy.policy_value_fn, c_puct=5, n_playout=1000)  # set larger n_playout for better performance
+        mcts_player = MCTSPlayer(best_policy.policy_value_fn, c_puct=5, n_playout=1000) # set larger n_playout for better performance
         
         # uncomment the following line to play with pure MCTS (its much weaker even with a larger n_playout)
         # mcts_player = MCTS_Pure(c_puct=5, n_playout=1000)
