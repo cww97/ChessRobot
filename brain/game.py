@@ -1,6 +1,6 @@
 from __future__ import print_function
 import numpy as np
-import dobot as dobot
+import arm.dobot as dobot
 import myeye as eye
 from policy_value_net_tensorflow import PolicyValueNet
 from mcts_alphaZero import MCTSPlayer

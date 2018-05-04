@@ -1,13 +1,10 @@
-# just main for dobot
-# in: position to put
-# out: do the operation
 import DobotDll.DobotDllType as dType
 CON_STR = {
     dType.DobotConnect.DobotConnect_NoError: "DobotConnect_NoError",
     dType.DobotConnect.DobotConnect_NotFound: "DobotConnect_NotFound",
     dType.DobotConnect.DobotConnect_Occupied: "DobotConnect_Occupied"
 }
-api = dType.load('../dobot/DobotDll/')
+api = dType.load('../arm/DobotDll/')
 
 
 def connect():
@@ -101,7 +98,7 @@ def move_around():  # just for test
     
 def take_move(move):
     # input like [x,y] list
-    print('current dobot move at :')
+    print('current arm move at :')
     print(move)
 
 
