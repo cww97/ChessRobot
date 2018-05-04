@@ -52,7 +52,7 @@ def run():
         board = Board(width=width, height=height, n_in_row=n)
         game = Game(board)      
         
-        ################ human VS AI ###################        
+        # --------------- human VS AI ------------------
         # load the trained policy_value_net in either Theano/Lasagne, PyTorch or TensorFlow
         # best_policy = PolicyValueNet(width, height, model_file = model_file)
         # mcts_player = MCTSPlayer(best_policy.policy_value_fn, c_puct=5, n_playout=400)  
