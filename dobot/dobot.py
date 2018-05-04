@@ -7,7 +7,7 @@ CON_STR = {
     dType.DobotConnect.DobotConnect_NotFound: "DobotConnect_NotFound",
     dType.DobotConnect.DobotConnect_Occupied: "DobotConnect_Occupied"
 }
-api = dType.load(path='dobot/DobotDll/')
+api = dType.load('../dobot/DobotDll/')
 
 
 def connect():

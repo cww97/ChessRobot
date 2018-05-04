@@ -1,24 +1,15 @@
-# -*- coding: utf-8 -*-
-"""
-An implementation of the training pipeline of AlphaZero for Gomoku
-
-@author: Junxiao Song
-"""
-
 from __future__ import print_function
 import random
 import numpy as np
 from collections import defaultdict, deque
-from main import Board, Game
-#from policy_value_net import PolicyValueNet  # Theano and Lasagne
-# from policy_value_net_pytorch import PolicyValueNet  # Pytorch
+from game import Board, Game
 from policy_value_net_tensorflow import PolicyValueNet # Tensorflow
 from mcts_pure import MCTSPlayer as MCTS_Pure
 from mcts_alphaZero import MCTSPlayer
 
 
 class TrainPipeline():
-    def __init__(self, init_model=None):
+    def __init__(self, init_model='./best_policy.model'):
         # params of the board and the game
         self.board_width = 9
         self.board_height = 9

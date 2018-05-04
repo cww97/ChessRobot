@@ -18,6 +18,11 @@ def get_input():
 	return input("Your move: ")
 
 
+'''
+https://blog.csdn.net/u010128736/article/details/52875137
+http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_calib3d/py_calibration/py_calibration.html
+'''
+
 def demo():
 	# termination criteria
 	criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
@@ -35,6 +40,7 @@ def demo():
 	
 	# Find the chess board corners
 	ret, corners = cv2.findChessboardCorners(gray, (7, 6), None)
+	print(ret)
 	
 	# If found, add object points, image points (after refining them)
 	if ret == True:
