@@ -44,8 +44,10 @@ def run():
         best_policy = PolicyValueNet(width, height, model_file)
         mcts_player = MCTSPlayer(best_policy.policy_value_fn, c_puct=5, n_playout=1000)
         # human player, input your move in the format: 2,3
-        human = Human()
+        #second_palyer = MCTSPlayer(best_policy.policy_value_fn, c_puct=5, n_playout=1000)
         # set start_player=0 for human first
-        game.start_play(human, mcts_player, start_player=1, is_shown=1)
+        #human = Human()
+        game.start_self_play(mcts_player, is_shown=1)
+        #game.start_play(human, mcts_player, start_player=1, is_shown=1)
     except KeyboardInterrupt:
         print('\n\rquit')

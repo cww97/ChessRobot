@@ -9,7 +9,7 @@ from mcts_alphaZero import MCTSPlayer
 
 
 class TrainPipeline():
-    def __init__(self, init_model=None):
+    def __init__(self, init_model='./best_policy.model'):
         # params of the board and the game
         self.board_width = 9
         self.board_height = 9

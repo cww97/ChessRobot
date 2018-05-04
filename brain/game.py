@@ -161,6 +161,7 @@ class Game(object):
         while(1):
             current_player = self.board.get_current_player()
             player_in_turn = players[current_player]
+
             move = player_in_turn.get_action(self.board)
             if current_player == 2:
                 current_robot2_move = self.board.move_to_location(move)
