@@ -9,7 +9,7 @@ from __future__ import print_function
 import random
 import numpy as np
 from collections import defaultdict, deque
-from game import Board, Game
+from main import Board, Game
 #from policy_value_net import PolicyValueNet  # Theano and Lasagne
 # from policy_value_net_pytorch import PolicyValueNet  # Pytorch
 from policy_value_net_tensorflow import PolicyValueNet # Tensorflow
@@ -29,7 +29,7 @@ class TrainPipeline():
         self.learn_rate = 2e-3
         self.lr_multiplier = 1.0  # adaptively adjust the learning rate based on KL
         self.temp = 1.0 # the temperature param
-        self.n_playout = 400 # num of simulations for each move
+        self.n_playout = 1500 # num of simulations for each move
         self.c_puct = 5
         self.buffer_size = 10000
         self.batch_size = 512 # mini-batch size for training
@@ -38,10 +38,10 @@ class TrainPipeline():
         self.epochs = 5 # num of train_steps for each update
         self.kl_targ = 0.02
         self.check_freq = 50
-        self.game_batch_num = 1500
+        self.game_batch_num = 8000
         self.best_win_ratio = 0.0
         # num of simulations used for the pure mcts, which is used as the opponent to evaluate the trained policy
-        self.pure_mcts_playout_num = 1000
+        self.pure_mcts_playout_num = 2000
         if init_model:
             # start training from an initial policy-value net            
             self.policy_value_net = PolicyValueNet(self.board_width, self.board_height, model_file = init_model)

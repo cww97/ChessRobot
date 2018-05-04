@@ -7,7 +7,7 @@ CON_STR = {
     dType.DobotConnect.DobotConnect_NotFound: "DobotConnect_NotFound",
     dType.DobotConnect.DobotConnect_Occupied: "DobotConnect_Occupied"
 }
-api = dType.load()
+api = dType.load(path='dobot/DobotDll/')
 
 
 def connect():
@@ -97,6 +97,12 @@ def move_around():  # just for test
     while last_idx > dType.GetQueuedCmdCurrentIndex(api)[0]:  # Wait for Executing Last Command
         dType.dSleep(100)
     dType.SetQueuedCmdStopExec(api)  # Stop to Execute Command Queued
+    
+    
+def take_move(move):
+    # input like [x,y] list
+    print('current dobot move at :')
+    print(move)
 
 
 if __name__ == '__main__':

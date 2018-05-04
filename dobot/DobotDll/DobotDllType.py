@@ -453,13 +453,14 @@ DobotCommunicate = enum(
 
 ##################  API func   ##################
 
-def load():
+
+def load(path=''):
     if platform.system() == "Windows":
-        return CDLL("DobotDll/DobotDll.dll",  RTLD_GLOBAL)
+        return CDLL(path + "DobotDll.dll",  RTLD_GLOBAL)
     elif platform.system() == "Darwin" :
-        return CDLL("DobotDll/libDobotDll.dylib",  RTLD_GLOBAL)
+        return CDLL(path + "libDobotDll.dylib",  RTLD_GLOBAL)
     else:
-        return cdll.loadLibrary("DobotDll/libDobotDll.so")
+        return cdll.loadLibrary(path + "libDobotDll.so")
     
 def dSleep(ms):
     time.sleep(ms / 1000)

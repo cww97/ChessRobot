@@ -7,7 +7,7 @@ CON_STR = {
 }
 
 # Load Dll
-api = dType.load()
+api = dType.load(path='')
 
 # Connect Dobot
 state = dType.ConnectDobot(api, "", 115200)[0]
