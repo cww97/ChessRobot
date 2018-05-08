@@ -1,8 +1,12 @@
-# just, main
+'''
+
+'''
+
+
 import time
-from dobot import main as dobot
-from myeye import main as myeye
-from brain import main as brain
+import myeye as myeye
+import dobot as dobot
+import brain.game as brain
 
 
 def work():
@@ -18,7 +22,13 @@ def work():
 	pass
 
 
-if __name__ == '__main__':
+def main():
 	if dobot.connect() == dobot.dType.DobotConnect.DobotConnect_NoError:
 		work()
 	dobot.dType.DisconnectDobot(dobot.api)  # Disconnect Dobot
+
+
+if __name__ == '__main__':
+	brain.run()
+	
+

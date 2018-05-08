@@ -20,7 +20,7 @@ Jordan是这个机器人的名字
 
 // 后面再补
 
-[代码说明](dobot/README.md)
+[代码说明](arm/README.md)
 
 ## 图像处理
 

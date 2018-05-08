@@ -1,17 +1,45 @@
 from __future__ import print_function
 import numpy as np
-from dobot.DobotControl import take_move
+import arm.dobot as dobot
+import myeye as eye
+from policy_value_net_tensorflow import PolicyValueNet
+from mcts_alphaZero import MCTSPlayer
+
+
+class Human(object):
+    def __init__(self):
+        self.player = None
+    
+    def set_player_ind(self, p):
+        self.player = p
+    
+    def get_action(self, board):
+        try:
+            location = eye.get_input()
+            if isinstance(location, str):
+                location = [int(n, 10) for n in location.split(",")]  # for python3
+            move = board.location_to_move(location)
+        except Exception as e:
+            move = -1
+        if move == -1 or move not in board.availables:
+            print("invalid move")
+            move = self.get_action(board)
+        return move
+    
+    def __str__(self):
+        return "Human {}".format(self.player)
+
+
 class Board(object):
     """
     board for the game
     """
-
     def __init__(self, **kwargs):
         self.width = int(kwargs.get('width', 9))
         self.height = int(kwargs.get('height', 9))
-        self.states = {} # board states, key:move as location on the board, value:player as pieces type
-        self.n_in_row = int(kwargs.get('n_in_row', 5)) # need how many pieces in a row to win
-        self.players = [1, 2] # player1 and player2
+        self.states = {}  # board states, key:move as location on the board, value:player as pieces type
+        self.n_in_row = int(kwargs.get('n_in_row', 5))  # need how many pieces in a row to win
+        self.players = [1, 2]  # player1 and player2
         
     def init_board(self, start_player=0):
         if self.width < self.n_in_row or self.height < self.n_in_row:
@@ -29,12 +57,12 @@ class Board(object):
         0 1 2
         and move 5's location is (1,2)
         """
-        h = move  // self.width
-        w = move  %  self.width
+        h = move // self.width
+        w = move % self.width
         return [h, w]
 
     def location_to_move(self, location):
-        if(len(location) != 2):
+        if (len(location) != 2):
             return -1
         h = location[0]
         w = location[1]
@@ -144,28 +172,28 @@ class Game(object):
                 else:
                     print('_'.center(8), end='')
             print('\r\n\r\n')
-            
+
     def start_play(self, player1, player2, start_player=0, is_shown=1):
         """
         start a game between two players
         """
-        if start_player not in (0,1):
+        if start_player not in (0, 1):
             raise Exception('start_player should be 0 (player1 first) or 1 (player2 first)')
         self.board.init_board(start_player)
         p1, p2 = self.board.players
         player1.set_player_ind(p1)
         player2.set_player_ind(p2)
-        players = {p1: player1, p2:player2}
+        players = {p1: player1, p2: player2}
         if is_shown:
             self.graphic(self.board, player1.player, player2.player)
-        while(1):
+            
+        while True:
             current_player = self.board.get_current_player()
             player_in_turn = players[current_player]
-
             move = player_in_turn.get_action(self.board)
             if current_player == 2:
                 current_robot2_move = self.board.move_to_location(move)
-                take_move(current_robot2_move)
+                dobot.set_chess(current_robot2_move[0], current_robot2_move[1])
             self.board.do_move(move)
             if is_shown:
                 self.graphic(self.board, player1.player, player2.player)
@@ -176,9 +204,8 @@ class Game(object):
                         print("Game end. Winner is", players[winner])
                     else:
                         print("Game end. Tie")
-                return winner   
-            
-            
+                return winner
+
     def start_self_play(self, player, is_shown=0, temp=1e-3):
         self.board.init_board()
         p1, p2 = self.board.players
@@ -200,7 +227,7 @@ class Game(object):
                 if winner != -1:
                     winners_z[np.array(current_players) == winner] = 1.0
                     winners_z[np.array(current_players) != winner] = -1.0
-                #reset MCTS root node
+                # reset MCTS root node
                 player.reset_player() 
                 if is_shown:
                     if winner != -1:
@@ -208,3 +235,24 @@ class Game(object):
                     else:
                         print("Game end. Tie")
                 return winner, zip(states, mcts_probs, winners_z)
+
+
+def run():
+    print('???????')
+    width, height = 9, 9
+    model_file = 'models/cur_model/best_policy.model'
+    try:
+        game = Game(Board(width=width, height=height, n_in_row=5))
+        best_policy = PolicyValueNet(width, height, model_file)
+        mcts_player = MCTSPlayer(best_policy.policy_value_fn, c_puct=5, n_playout=1000)
+        # human player, input your move in the format: 2,3
+        # set start_player = 0 for human first
+        game.start_play(Human(), mcts_player, start_player=1, is_shown=1)
+    except KeyboardInterrupt:
+        print('\n\rquit')
+
+
+if __name__ == '__main__':
+    #  if dobot.connect() == dobot.dType.DobotConnect.DobotConnect_NoError:
+    run()
+    # dobot.dType.DisconnectDobot(dobot.api)  # Disconnect Dobot
