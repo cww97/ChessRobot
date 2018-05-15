@@ -193,7 +193,7 @@ class Game(object):
             move = player_in_turn.get_action(self.board)
             if current_player == 2:
                 current_robot2_move = self.board.move_to_location(move)
-                dobot.set_chess(current_robot2_move[0], current_robot2_move[1])
+                #dobot.set_chess(current_robot2_move[0], current_robot2_move[1])
             self.board.do_move(move)
             if is_shown:
                 self.graphic(self.board, player1.player, player2.player)
@@ -247,7 +247,7 @@ def run():
         mcts_player = MCTSPlayer(best_policy.policy_value_fn, c_puct=5, n_playout=1000)
         # human player, input your move in the format: 2,3
         # set start_player = 0 for human first
-        game.start_play(Human(), mcts_player, start_player=1, is_shown=1)
+        game.start_self_play(mcts_player, is_shown=1)
     except KeyboardInterrupt:
         print('\n\rquit')
 
