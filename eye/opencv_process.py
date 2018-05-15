@@ -5,12 +5,13 @@ from cv2 import *
 
 
 if __name__ == '__main__':
-    img = cv2.imread('test3.jpg')
+    img = cv2.imread('test5.bmp')
     img = cv2.resize(img, None, fx=0.3, fy=0.3)
     imgray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     edge = cv2.Canny(imgray, 500, 200)
-    #ret, thresh = cv2.threshold(edge, 127, 127, 127)
-    #image, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    # ret, thresh = cv2.threshold(edge, 127, 127, 127)
+    # image, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     x0 = 10000
     x1 = -1
     y0 = 10000
