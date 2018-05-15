@@ -3,9 +3,8 @@ import cv2
 from matplotlib import pyplot as plt
 from cv2 import *
 
-
 if __name__ == '__main__':
-    img = cv2.imread('test3.jpg')
+    img = cv2.imread('./test3.jpg')
     img = cv2.resize(img, None, fx=0.3, fy=0.3)
     imgray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     edge = cv2.Canny(imgray, 500, 200)
