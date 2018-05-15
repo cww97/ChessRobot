@@ -23,6 +23,11 @@ https://blog.csdn.net/u010128736/article/details/52875137
 http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_calib3d/py_calibration/py_calibration.html
 '''
 
+# 压缩图片，裁剪图片，旋转图片
+def handle_image(path):
+    image = cv2.imread(path)
+    res = cv2.resize(image, (1500,2000), interpolation=cv2.INTER_AREA)
+    cv2.imwrite("./data/compression.jpg", res)
 
 def demo():
 	# termination criteria
@@ -59,4 +64,5 @@ def demo():
 
 
 if __name__ == '__main__':
-	demo()
+	# demo()
+    handle_image("./data/pic0.jpg")
