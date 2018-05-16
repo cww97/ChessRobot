@@ -1,7 +1,7 @@
 from __future__ import print_function
 import numpy as np
 import arm.dobot as dobot
-import myeye as eye
+import eye.myeye as eye
 from policy_value_net_tensorflow import PolicyValueNet
 from mcts_alphaZero import MCTSPlayer
 
@@ -245,9 +245,10 @@ def run():
         game = Game(Board(width=width, height=height, n_in_row=5))
         best_policy = PolicyValueNet(width, height, model_file)
         mcts_player = MCTSPlayer(best_policy.policy_value_fn, c_puct=5, n_playout=1000)
-        # human player, input your move in the format: 2,3
+        human_player = Human()
         # set start_player = 0 for human first
-        game.start_self_play(mcts_player, is_shown=1)
+        # game.start_self_play(mcts_player, is_shown=1)
+        game.start_play(mcts_player, human_player, is_shown=1)
     except KeyboardInterrupt:
         print('\n\rquit')
 
