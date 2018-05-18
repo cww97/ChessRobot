@@ -3,7 +3,8 @@ from numpy import *
 import numpy as np
 from time import clock
 
-if __name__ == '__main__':
+
+def process_image():
     img = Image.open('output.jpg')
     # img.resize((988, 988))
     img = img.convert('L')
@@ -43,4 +44,4 @@ if __name__ == '__main__':
                 outputlist.append(0)
 
     out = np.matrix(outputlist).reshape((9, 9))
-    print(out)
+    return out
