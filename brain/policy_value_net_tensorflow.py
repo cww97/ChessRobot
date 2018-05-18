@@ -1,6 +1,6 @@
-
 import numpy as np
 import tensorflow as tf
+
 
 class PolicyValueNet():
     def __init__(self, board_width, board_height, model_file=None):
