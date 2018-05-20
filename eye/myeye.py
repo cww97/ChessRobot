@@ -27,6 +27,7 @@ def get_input(old_last):
                     old_last = last
 
 
+
 if __name__ == '__main__':
     first_last = process_image()
     first_last[2, 0] = 0
