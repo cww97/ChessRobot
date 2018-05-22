@@ -3,8 +3,8 @@
 # out: matrix of a board state
 import cv2
 import numpy as np
-from imageProcess import process_image
-
+from eye.opencv_process import *
+import time
 
 def see():
     img = cv2.imread('data/try0.png')
@@ -16,22 +16,23 @@ def see():
 
 
 def get_input(old_last):
-    last = cv2.imread('../camera/chessboard.png')
     while True:
-        last = process_image()
-        test = last - old_last
-        for i in range(len(test)):
-            for j in range(len(test[0])):
-                if test[i, j] == -1:
-                    return str(i)+','+str(j), last
-                if test[i, j] == 1:
-                    old_last = last
-
+        now = cv2.imread('../camera/chessboard.png')
+        now = cut_process(now)
+        result_img = image_process(now, old_last)
+        result_img = cv2.medianBlur(result_img, 7)
+        location, player = get_input_result(result_img, now)
+        if player == 'black':
+            old_last = now
+            print('Now is the AI')
+        elif player == 'white':
+            print('Now is the player')
+            old_last = now
+            return location
+        time.sleep(3)
 
 
 if __name__ == '__main__':
-    first_last = process_image()
-    first_last[2, 0] = 0
-    action, new_last = get_input(first_last)
-    print(new_last)
-    print('action', action)
+    last = cv2.imread('../camera/start.png')
+    last = cut_process(last)
+    get_input(last)

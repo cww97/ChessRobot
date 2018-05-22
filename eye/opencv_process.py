@@ -51,7 +51,7 @@ def cut_process(input_image):
     return img2
 
 
-def get_input(result_image, chessboard_image):
+def get_input_result(result_image, chessboard_image):
     l, w = result_image.shape
     imgray = cv2.cvtColor(chessboard_image, cv2.COLOR_BGR2GRAY)
     num = 0
@@ -94,7 +94,7 @@ def get_input(result_image, chessboard_image):
 
 if __name__ == '__main__':
     img = cv2.imread('../camera/start.png')
-    last_img = cv2.imread('../camera/start.png')
+    last_img = cv2.imread('../camera/chessboard.png')
     img = cut_process(img)
     last_img = cut_process(last_img)
     cv2.imwrite('output1.jpg', img)
@@ -102,4 +102,4 @@ if __name__ == '__main__':
     result = image_process(img, last_img)
     result = cv2.medianBlur(result, 7)
     cv2.imwrite('result.jpg', result)
-    get_input(result, img)
+    get_input_result(result, img)
