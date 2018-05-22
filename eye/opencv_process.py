@@ -1,5 +1,6 @@
 from cv2 import *
 import cv2
+from math import ceil
 
 
 def image_process(img, last_img):
@@ -55,18 +56,37 @@ def get_input(result_image, chessboard_image):
     imgray = cv2.cvtColor(chessboard_image, cv2.COLOR_BGR2GRAY)
     num = 0
     single_sum = 0
+    x0 = -1
+    x1 = 10000
+    y0 = -1
+    y1 = 10000
     for i in range(l):
         for j in range(w):
             if result_image[i, j] > 0:
                 num += 1
                 tmp = imgray[i, j]
                 single_sum += tmp
+                if i > x0:
+                    x0 = i
+                if i < x1:
+                    x1 = i
+                if j > y0:
+                    y0 = j
+                if j < y1:
+                    y1 = j
+    x, y = (x0 + x1) / 2, (y0 + y1) / 2
+    x, y = 8 * (x - 50) / (l - 100), 8 * (y - 40) / (w - 80)
+    x, y = int(x), ceil(8 - y)
+    location = [x, y]
     if num > 0:
         single_sum = single_sum / num
     if single_sum < 60:
-        print(0, 'black')
+        player = 'black'
     else:
-        print(1, 'white')
+        player = 'white'
+    print('location: ', location)
+    print('player', player)
+    return location, player
 
 
 if __name__ == '__main__':

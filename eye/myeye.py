@@ -16,6 +16,7 @@ def see():
 
 
 def get_input(old_last):
+    last = cv2.imread('../camera/chessboard.png')
     while True:
         last = process_image()
         test = last - old_last
