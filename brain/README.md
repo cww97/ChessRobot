@@ -38,7 +38,7 @@
 进行拟合。
 ## 运行
 
-跑着玩的话直接 python main_start.py就好拉。。。
+跑着玩的话直接 python game.py就好拉。。。
 
 
 ## 附
