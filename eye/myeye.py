@@ -16,6 +16,7 @@ def see():
 
 
 def get_input(old_last):
+    last = cv2.imread('../camera/chessboard.png')
     while True:
         last = process_image()
         test = last - old_last
@@ -25,6 +26,7 @@ def get_input(old_last):
                     return str(i)+','+str(j), last
                 if test[i, j] == 1:
                     old_last = last
+
 
 
 if __name__ == '__main__':
