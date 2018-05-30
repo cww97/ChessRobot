@@ -1,4 +1,4 @@
-import DobotDllType as dType
+import arm.DobotDll.DobotDllType as dType
 
 CON_STR = {
     dType.DobotConnect.DobotConnect_NoError:  "DobotConnect_NoError",

@@ -1,8 +1,10 @@
 # just main for eye
 # in: jpg
 # out: matrix of a board state
+
 import cv2
 import numpy as np
+
 from eye.opencv_process import *
 import time
 
