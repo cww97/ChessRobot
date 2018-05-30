@@ -1,4 +1,4 @@
-'''
+
 import DobotDll.DobotDllType as dType
 CON_STR = {
     dType.DobotConnect.DobotConnect_NoError: "DobotConnect_NoError",
@@ -96,7 +96,7 @@ def move_around():  # just for test
         dType.dSleep(100)
     dType.SetQueuedCmdStopExec(api)  # Stop to Execute Command Queued
     
-'''
+
 def take_move(move):
     # input like [x,y] list
     print('current arm move at :')
