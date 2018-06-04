@@ -14,7 +14,6 @@ state = dType.ConnectDobot(api, "", 115200)[0]
 print("Connect status:", CON_STR[state])
 
 if state == dType.DobotConnect.DobotConnect_NoError:
-
     # Clean Command Queued
     dType.SetQueuedCmdClear(api)
 
