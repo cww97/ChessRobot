@@ -1,6 +1,7 @@
 from cv2 import *
 import cv2
 from math import ceil
+from matplotlib import pyplot as plt
 
 
 def image_process(img, last_img):
@@ -20,6 +21,8 @@ def image_process(img, last_img):
 
 def cut_process(input_image):
     img = cv2.resize(input_image, None, fx=0.3, fy=0.3)
+    o_img = img
+
     img = cv2.medianBlur(img, 7)
     #img = img[0:700, 150:700]
     imgray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -48,7 +51,7 @@ def cut_process(input_image):
     #test = cv2.drawContours(edge, contours, 0, (0, 0, 0), 10)
     img2 = img[x0:x1, y0:y1]
     cv2.imwrite('output.jpg', img2)
-    return img2
+    return img2, o_img, edge
 
 
 def get_input_result(result_image, chessboard_image):
@@ -77,6 +80,12 @@ def get_input_result(result_image, chessboard_image):
     if abs(x1 - x0) > 100 or abs(y1 - y0) > 100:
         print('None')
         return [-1, -1], 'None'
+    LOWER_LEFT = [318, -86, HEIGHT]
+    LOWER_RIGHT = [318, 86, HEIGHT]
+    UPPER_LEFT = [132, -86, HEIGHT]
+    UPPER_RIGHT = [132, 86, HEIGHT]
+    unit_len = 1. * (LOWER_RIGHT[1] - LOWER_RIGHT[1]) / (n - 1)
+    unit_wid = 1. * (LOWER_RIGHT[0] - UPPER_RIGHT[0]) / (m - 1)
     x, y = (x0 + x1) / 2, (y0 + y1) / 2
     x, y = 8 * (x - 50) / (l - 100), 8 * (y - 40) / (w - 80)
     x, y = int(x), ceil(8 - y)
@@ -90,16 +99,3 @@ def get_input_result(result_image, chessboard_image):
     print('location: ', location)
     print('player', player)
     return location, player
-
-
-if __name__ == '__main__':
-    img = cv2.imread('../camera/start.png')
-    last_img = cv2.imread('../camera/chessboard.png')
-    img = cut_process(img)
-    last_img = cut_process(last_img)
-    cv2.imwrite('output1.jpg', img)
-    cv2.imwrite('output2.jpg', last_img)
-    result = image_process(img, last_img)
-    result = cv2.medianBlur(result, 7)
-    cv2.imwrite('result.jpg', result)
-    get_input_result(result, img)
