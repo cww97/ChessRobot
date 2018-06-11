@@ -1,8 +1,10 @@
 # just main for eye
 # in: jpg
 # out: matrix of a board state
+
 import cv2
 import numpy as np
+
 from eye.opencv_process import *
 import time
 
@@ -32,7 +34,18 @@ def get_input(old_last):
         time.sleep(3)
 
 
+def get_keyboard_input():
+    result = input("Please input the location:\n")
+    return result
+
 if __name__ == '__main__':
+<<<<<<< HEAD
     last = cv2.imread('../camera/start.png')
     last = cut_process(last)
     get_input(last)
+=======
+    # last = cv2.imread('../camera/start.png')
+    # last = cut_process(last)
+    # get_input(last)
+    get_keyboard_input()
+>>>>>>> e45c62e79c6755d0608df52593b558fc5b131b56

@@ -1,4 +1,4 @@
-import DobotDllType as dType
+import arm.DobotDll.DobotDllType as dType
 
 CON_STR = {
     dType.DobotConnect.DobotConnect_NoError:  "DobotConnect_NoError",
@@ -14,7 +14,6 @@ state = dType.ConnectDobot(api, "", 115200)[0]
 print("Connect status:", CON_STR[state])
 
 if state == dType.DobotConnect.DobotConnect_NoError:
-
     # Clean Command Queued
     dType.SetQueuedCmdClear(api)
 
