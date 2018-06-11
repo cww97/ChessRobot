@@ -34,7 +34,12 @@ def get_input(old_last):
         time.sleep(3)
 
 
+def get_keyboard_input():
+    result = input("Please input the location:\n")
+    return result
+
 if __name__ == '__main__':
-    last = cv2.imread('../camera/start.png')
-    last = cut_process(last)
-    get_input(last)
+    # last = cv2.imread('../camera/start.png')
+    # last = cut_process(last)
+    # get_input(last)
+    get_keyboard_input()

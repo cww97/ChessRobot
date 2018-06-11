@@ -1,6 +1,6 @@
 from __future__ import print_function
 import numpy as np
-import arm.dobot as dobot
+# import arm.dobot as dobot
 import eye.myeye as eye
 from policy_value_net_tensorflow import PolicyValueNet
 from mcts_alphaZero import MCTSPlayer
@@ -15,7 +15,7 @@ class Human(object):
     
     def get_action(self, board):
         try:
-            location = eye.get_input()
+            location = eye.get_keyboard_input()
             if isinstance(location, str):
                 location = [int(n, 10) for n in location.split(",")]  # for python3
             move = board.location_to_move(location)
@@ -25,7 +25,7 @@ class Human(object):
             print("invalid move")
             move = self.get_action(board)
         return move
-    
+
     def __str__(self):
         return "Human {}".format(self.player)
 
@@ -193,7 +193,7 @@ class Game(object):
             move = player_in_turn.get_action(self.board)
             if current_player == 2:
                 current_robot2_move = self.board.move_to_location(move)
-                #dobot.set_chess(current_robot2_move[0], current_robot2_move[1])
+                # dobot.set_chess(current_robot2_move[0], current_robot2_move[1])
             self.board.do_move(move)
             if is_shown:
                 self.graphic(self.board, player1.player, player2.player)

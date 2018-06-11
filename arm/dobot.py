@@ -56,22 +56,24 @@ def set_chess(x, y):
 
 # 落子的demo
 def take_chess_test():
+    # 先让机械臂定位到指定的（x, y）坐标，并令z值处于较高位置，然后暂停0.5s后启动吸盘并降低机械臂
+    # 然后提起棋子，移到指定位置上方暂停0.5s，然后下降并释放棋子，最后归零。
     dType.SetQueuedCmdClear(api)  # Clean Command Queued
-    # dType.SetHOMEParams(api, safe_pos[0], safe_pos[1], safe_pos[2], 0, isQueued=1)
-    # dType.SetHOMECmd(api, temp=0, isQueued=1)
-    move_q([129.35, -103.04, 20])
+    dType.SetHOMEParams(api, safe_pos[0], safe_pos[1], safe_pos[2], 0, isQueued=1)
+    #dType.SetHOMECmd(api, temp=0, isQueued=1)
+    move_q([117.39, -181.0795, 20])
     dType.SetWAITCmd(api, 0.5)
-    move_q([129.35, -103.04, -6])
+    move_q([117.39, -181.0795, -5])
     dType.SetWAITCmd(api, 0.5)
     dType.SetEndEffectorSuctionCup(api, True, True, isQueued=1)
     dType.SetWAITCmd(api, 0.5)
     move_q([127, -109, 20])
     dType.SetWAITCmd(api, 0.5)
-    move_q([221.2, 53, 4])
+    move_q([218.1596, 96.2065, -25])
     dType.SetWAITCmd(api, 0.5)
     dType.SetEndEffectorSuctionCup(api, True, False, isQueued=1)
     dType.SetWAITCmd(api, 0.5)
-    move_q([233, 42, 20])
+    move_q([218.1596, 96.2065, 20])
     dType.SetWAITCmd(api, 0.5)
     last_idx = move_q(safe_pos)
     dType.SetQueuedCmdStartExec(api)  # Start to Execute Command Queued
@@ -91,5 +93,5 @@ if __name__ == '__main__':
     if connect() == dType.DobotConnect.DobotConnect_NoError:
         take_chess_test()
         # set_chess(0, 0)
-        pass
-    dType.DisconnectDobot(api)  # Disconnect Dobot
+        # pass
+    # dType.DisconnectDobot(api)  # Disconnect Dobot
